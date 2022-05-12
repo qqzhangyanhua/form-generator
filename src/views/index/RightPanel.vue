@@ -397,13 +397,16 @@
 
             <!-- 级联选择静态树 -->
             <el-tree
-              v-if="activeData.__config__.dataType === 'static'"
+              v-if="activeData.__config__.dataType === 'static' && activeData.__config__.tag !== 'el-table'"
               draggable
               :data="activeData.options"
               node-key="id"
               :expand-on-click-node="false"
               :render-content="renderContent"
             />
+            <ul v-if=" activeData.__config__.tag === 'el-table' && activeData.__config__.dataType === 'static'">
+              <li v-for="(item ,index) in activeData.__config__.children" :key="index">label:{{item.label}} /prop:{{item.prop}}</li>
+            </ul>
             <div v-if="activeData.__config__.dataType === 'static'" style="margin-left: 20px">
               <el-button
                 style="padding-bottom: 0"
@@ -839,6 +842,7 @@ export default {
       })
     },
     addTreeItem() {
+      console.log('activeData.options', this.activeData)
       ++this.idGlobal
       this.dialogVisible = true
       this.currentNode = this.activeData.options

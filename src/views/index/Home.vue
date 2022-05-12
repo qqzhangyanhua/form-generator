@@ -4,9 +4,9 @@
       <div class="logo-wrapper">
         <div class="logo">
           <img :src="logo" alt="logo"> Form Generator
-          <a class="github" href="https://github.com/JakHuang/form-generator" target="_blank">
+          <!-- <a class="github" href="https://github.com/JakHuang/form-generator" target="_blank">
             <img src="https://github.githubassets.com/pinned-octocat.svg" alt>
-          </a>
+          </a> -->
         </div>
       </div>
       <el-scrollbar class="left-scrollbar">
@@ -323,6 +323,8 @@ export default {
       }
     },
     addComponent(item) {
+      console.log('点击item======', item)
+      console.log(this.drawingList)
       const clone = this.cloneComponent(item)
       this.fetchData(clone)
       this.drawingList.push(clone)
@@ -358,6 +360,7 @@ export default {
         fields: deepClone(this.drawingList),
         ...this.formConf
       }
+      console.log(this.formData)
     },
     generate(data) {
       const func = this[`exec${titleCase(this.operationType)}`]
